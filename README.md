@@ -7,7 +7,7 @@ Este é um projeto desenvolvido como parte da Avaliação 3 da disciplina de Jav
 ## Integrantes da Equipe
 
 - José Heitor Dias Tavares
-- Gustavo Henrique Barbosa de Araújo
+- Gustavo Henrique Araújo Barbosa
 
 ## Requisitos
 
