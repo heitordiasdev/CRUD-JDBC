@@ -8,6 +8,7 @@ Este é um projeto desenvolvido como parte da Avaliação 3 da disciplina de Jav
 
 - José Heitor Dias Tavares
 - Gustavo Henrique Araújo Barbosa
+- João Victor Antunes de Oliveira
 
 ## Requisitos
 
