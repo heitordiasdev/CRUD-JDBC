@@ -118,4 +118,34 @@ public class ProdutoDAO {
         stmt.close();
         return produto;
     }
+
+    // 6 QUESTAO
+    public void atualizarPrecoProduto(Produto produto){
+        try {
+            String sql = "UPDATE PRODUTO SET PRECO = ?" +
+                    "WHERE ID = ?";
+            var stmt = connection.prepareStatement(sql);
+            stmt.setObject(1, produto.getPreco());
+            stmt.setObject(2, produto.getId());
+            stmt.executeUpdate();
+            stmt.close();
+            System.out.println("Atualização de preço realizada com sucesso!");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    // 7 QUESTAO
+    public void removerProdutoPeloNome(String nome) {
+        try {
+            String sql = "DELETE FROM PRODUTO WHERE NOME = ?";
+            var stmt = connection.prepareStatement(sql);
+            stmt.setString(1, nome);
+            stmt.execute();
+            stmt.close();
+            System.out.println("Remoção do produto realizada com sucesso!");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
