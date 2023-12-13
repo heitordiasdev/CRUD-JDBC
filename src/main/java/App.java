@@ -39,5 +39,23 @@ public class App {
         Produto produtoProxDeVencer = produtoDAO.listarProdutoProxDeVencer();
         System.out.println(produtoProxDeVencer);
 
+        Produto produtoAtualizado = new Produto();
+        produtoAtualizado.setId(1L);
+        produtoAtualizado.setPreco(25.00);
+
+        produtoDAO.atualizarPrecoProduto(produtoAtualizado);
+
+        // Listar todos os produtos após a atualização
+        System.out.println("\nLista de produtos após a atualização:");
+        produtoDAO.listarProdutos().forEach(p -> System.out.println(p));
+
+        // Remover um produto pelo nome
+        String nomeProdutoParaRemover = "Bolacha"; // Substitua pelo nome correto
+        produtoDAO.removerProdutoPeloNome(nomeProdutoParaRemover);
+
+        // Listar todos os produtos após a remoção
+        System.out.println("\nLista de produtos após a remoção:");
+        produtoDAO.listarProdutos().forEach(p -> System.out.println(p));
+
     }
 }
