@@ -6,6 +6,7 @@ import domain.Produto;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class ProdutoDAO {
         this.connection = ConnectionPostgreSQL.getConnection();
     }
 
+    // 1 QUESTAO
     public void inserirProduto(Produto produto){
         String sql = "INSERT INTO PRODUTO (nome,preco,categoria,datavencimento) values (?,?,?,?)";
         try {
@@ -33,6 +35,7 @@ public class ProdutoDAO {
         }
     }
 
+    // 2 QUESTAO
     public List<Produto> listarProdutos() throws SQLException{
         var produtos = new ArrayList<Produto>();
         String sql = "SELECT * FROM PRODUTO";
@@ -52,7 +55,26 @@ public class ProdutoDAO {
         return produtos;
     }
 
+    // 3 QUESTAO
+    public List<Produto> listarPorCategoria(String categoria) throws SQLException {
+        List<Produto> produtos = new ArrayList<>();
+        String sql = "SELECT * FROM PRODUTO WHERE CATEGORIA = ?";
+        var stmt = connection.prepareStatement(sql);
+        stmt.setString(1, categoria);
+        var rs = stmt.executeQuery();
 
+        while (rs.next()) {
+            var produto = new Produto();
+            produto.setId(rs.getLong("id"));
+            produto.setNome(rs.getString("nome"));
+            produto.setPreco(rs.getDouble("preco"));
+            produto.setCategoria(rs.getString("categoria"));
+            produto.setDataVencimento(LocalDate.parse(rs.getString("datavencimento")));
+            produtos.add(produto);
+        }
 
-
+        rs.close();
+        stmt.close();
+        return produtos;
+    }
 }
