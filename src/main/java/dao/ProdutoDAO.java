@@ -77,4 +77,45 @@ public class ProdutoDAO {
         stmt.close();
         return produtos;
     }
+
+
+    // 4 QUESTAO
+    public Produto listarProdutoMaiorPreco() throws SQLException {
+        String sql = "SELECT * FROM PRODUTO WHERE PRECO = (SELECT MAX(PRECO) FROM PRODUTO)";
+        var stmt = connection.prepareStatement(sql);
+        var rs = stmt.executeQuery();
+        var produto = new Produto();
+        if (rs.next()) {
+
+            produto.setId(rs.getLong("id"));
+            produto.setNome(rs.getString("nome"));
+            produto.setPreco(rs.getDouble("preco"));
+            produto.setCategoria(rs.getString("categoria"));
+            produto.setDataVencimento(LocalDate.parse(rs.getString("datavencimento")));
+        }
+
+        rs.close();
+        stmt.close();
+        return produto;
+    }
+
+    // 5 QUESTAO
+    public Produto listarProdutoProxDeVencer() throws SQLException {
+        String sql = "SELECT * FROM PRODUTO WHERE DATAVENCIMENTO = (SELECT MIN(DATAVENCIMENTO) FROM PRODUTO WHERE DATAVENCIMENTO >= CURRENT_DATE)";
+        var stmt = connection.prepareStatement(sql);
+        var rs = stmt.executeQuery();
+        var produto = new Produto();
+        if (rs.next()) {
+
+            produto.setId(rs.getLong("id"));
+            produto.setNome(rs.getString("nome"));
+            produto.setPreco(rs.getDouble("preco"));
+            produto.setCategoria(rs.getString("categoria"));
+            produto.setDataVencimento(LocalDate.parse(rs.getString("datavencimento")));
+        }
+
+        rs.close();
+        stmt.close();
+        return produto;
+    }
 }

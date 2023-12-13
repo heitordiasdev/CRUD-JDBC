@@ -33,5 +33,11 @@ public class App {
         System.out.println("\nProdutos da categoria '" + categoria + "':");
         produtosPorCategoria.forEach(p -> System.out.println(p));
 
+        Produto produtoMaiorPreco = produtoDAO.listarProdutoMaiorPreco();
+        System.out.println("\n" + produtoMaiorPreco);
+
+        Produto produtoProxDeVencer = produtoDAO.listarProdutoProxDeVencer();
+        System.out.println(produtoProxDeVencer);
+
     }
 }
